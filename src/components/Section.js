@@ -1,24 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import Fade from 'react-reveal/Fade'
   
 
-function Section({ title, description, leftBtnTxt, rightBtnTxt, backgroundImg }) {
+function Section({ title, description, leftBtnTxt, rightBtnTxt, backgroundImg, next, id }) {
     return (
-        <Wrap bgImage = {backgroundImg}>
-          <ItemText>
-            <h1>{title}</h1>
-            <p>{description}</p>
-          </ItemText>
+        <Wrap bgImage = {backgroundImg} id ={id}>
+          <Fade bottom>
+            <ItemText>
+              <h1>{title}</h1>
+             <p>{description}</p>
+            </ItemText>
+          </Fade>
             <Buttons>
-              <ButtonGroup>
-                <LeftButton>
-                  {leftBtnTxt}     
-                </LeftButton>
-                <RightButton>
-                  {rightBtnTxt}
-                </RightButton>
-              </ButtonGroup>
-              <DownArrow src="/images/down-arrow.svg" />
+              <Fade bottom>
+                <ButtonGroup>
+                  <LeftButton>
+                    {leftBtnTxt}     
+                  </LeftButton>
+                  {rightBtnTxt &&
+                    <RightButton>
+                      {rightBtnTxt}
+                    </RightButton>
+                  }
+                </ButtonGroup>
+              </Fade>
+              <a href={`#${next}`}>
+                <DownArrow src="/images/down-arrow.svg" />
+              </a>
             </Buttons>
         </Wrap>
     )
@@ -27,6 +36,7 @@ function Section({ title, description, leftBtnTxt, rightBtnTxt, backgroundImg })
 export default Section;
 
 const Wrap = styled.div`
+    id: ${props => props.id}
     width: 100vw;
     height: 100vh;
     background-size: cover;
